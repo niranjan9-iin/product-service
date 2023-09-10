@@ -18,10 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductService {
 
 	private final ProductRepository productRepo;
-
+	private static int counterId=101;
 	public void createProduct(ProductRequest productReq) {
 		Product product = Product.builder().name(productReq.getName()).description(productReq.getDescription())
 				.price(productReq.getPrice()).build();
+		product.setId(""+counterId);
+		counterId++;
 		productRepo.save(product);
 		log.info("Product {} is saved", product.getId());
 	}
